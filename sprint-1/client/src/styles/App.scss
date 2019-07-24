@@ -1,0 +1,13 @@
+@import "./partials/nav.scss";
+@import "./partials/video.scss";
+@import "./partials/colour.scss";
+@import "./partials/mixin.scss";
+@import "./partials/fonts.scss";
+@import "./partials/variables.scss";
+@import "./partials/comment.scss";
+
+* {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: avenir;
+}

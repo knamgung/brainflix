@@ -1,0 +1,131 @@
+@import "./mixin.scss";
+@import "./variables.scss";
+.profile-pic {
+  width: 3em;
+  height: 3em;
+  border-radius: 100%;
+}
+
+.navbar {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  height: 4em;
+  padding: 0 $side-padding-desktop;
+
+  &__logo {
+    margin-right: 1em;
+  }
+
+  &__form {
+    position: relative;
+    margin-left: auto;
+    width: 17%;
+  }
+
+  &__search {
+    height: $search-button-height;
+    padding-left: 30px;
+    width: 100%;
+    @include input;
+
+    &--icon {
+      position: absolute;
+      left: 0.5em;
+      top: 0.65em;
+      width: 0.75em;
+      height: 0.75em;
+    }
+  }
+
+  &__upload {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 12em;
+
+    &--button {
+      height: $search-button-height;
+      background-color: $bb-light-blue;
+      color: white;
+      margin: 0 0 0 1em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 10em;
+      border-radius: 0.35em;
+
+      & img {
+        margin-right: 0.5em;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .navbar {
+    padding: 0 $side-padding-tablet;
+    height: 5em;
+
+    &__form {
+      width: 25%;
+    }
+
+    &__upload {
+      width: 9.5em;
+      &--button {
+        width: 7.5em;
+        margin-right: 0.5em;
+
+        & img {
+          width: 1em;
+          height: 1em;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navbar {
+    flex-direction: column;
+    padding: 0.75em $side-padding-phone;
+    height: 10em;
+
+    justify-content: space-around;
+    &__logo {
+      width: 40%;
+      margin-right: 0;
+      margin-bottom: 0.5em;
+    }
+
+    &__form {
+      width: 100%;
+    }
+
+    &__search {
+      height: 3.75em;
+      padding-left: 35px;
+
+      &--icon {
+        width: 1em;
+        height: 1em;
+        left: 0.75em;
+        top: 0.75em;
+      }
+    }
+
+    &__upload {
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5em;
+      &--button {
+        height: 3.5em;
+        font-size: 0.9em;
+        width: 80%;
+        margin: 0;
+      }
+    }
+  }
+}

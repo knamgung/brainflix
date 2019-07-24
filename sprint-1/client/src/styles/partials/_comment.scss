@@ -1,0 +1,94 @@
+@import "./colour.scss";
+@import "./mixin.scss";
+@import "./variables.scss";
+
+.comment {
+  padding: 0 $side-padding-phone;
+  &__body {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__counter {
+    font-weight: 500;
+  }
+
+  &__profile-pic {
+    width: 48px;
+    height: 48px;
+    margin-top: 2em;
+    border-radius: 100%;
+  }
+
+  &__form {
+    display: flex;
+    flex-flow: column;
+  }
+
+  &__message {
+    width: 75%;
+    margin-left: 1em;
+    margin-bottom: 1.75em;
+  }
+
+  &__write {
+    height: 7em;
+    @include input;
+    resize: none;
+    padding: 0.5em;
+  }
+
+  &__title {
+    font-size: 0.75em;
+    margin-bottom: 0.25em;
+    color: $silver;
+  }
+
+  &__button {
+    color: white;
+    background-color: $bb-light-blue;
+    border-radius: 0.35em;
+    height: 3.5em;
+    font-size: 1em;
+    margin-top: 1em;
+  }
+}
+
+@media screen and (min-width: 401px) {
+  .comment {
+    padding: 0 $side-padding-tablet;
+    &__message {
+      width: 95%;
+      padding-left: 1em;
+      margin-left: 0;
+    }
+    &__body {
+      justify-content: flex-start;
+    }
+
+    &__form {
+      flex-flow: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-right: 3.5em;
+    }
+
+    &__write {
+      width: 100%;
+      height: 4em;
+      margin-right: 1.5em;
+    }
+
+    &__button {
+      width: 125px;
+      height: 4em;
+      font-size: 0.7em;
+      text-align: center;
+      margin: 0;
+    }
+
+    &__profile-pic {
+      margin-top: 1.6em;
+    }
+  }
+}

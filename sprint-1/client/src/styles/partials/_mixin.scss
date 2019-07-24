@@ -1,0 +1,12 @@
+@import "./colour.scss";
+
+@mixin input {
+  border-radius: 0.25em;
+  border: 1.3px solid $mercury;
+  background-color: $alabaster;
+
+  &:focus {
+    outline: none;
+    border: 1.5px solid $bb-light-blue;
+  }
+}
