@@ -83,7 +83,7 @@
   margin-right: 0.5em;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1440px) {
   .navbar {
     padding: 0 2em;
     height: 5em;
@@ -104,7 +104,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
   .navbar {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -124,7 +124,7 @@
     width: 100%;
   }
   .navbar__search {
-    height: 3.75em;
+    height: 3em;
     padding-left: 35px;
   }
   .navbar__search--icon {
@@ -175,7 +175,6 @@
 }
 
 .vid-head {
-  padding: 1em;
   background-color: white;
 }
 
@@ -272,10 +271,7 @@
   font-size: 1.25em;
 }
 
-@media screen and (min-width: 401px) {
-  .vid-head {
-    padding: 0 2em;
-  }
+@media screen and (min-width: 768px) {
   .video__player {
     width: 600px;
   }
@@ -318,9 +314,14 @@
   }
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 1440px) {
   .video__player {
     width: 1000px;
+  }
+  .desc {
+    margin: 2em 0;
+    width: 60%;
+    font-size: 1.05em;
   }
 }
 
@@ -342,10 +343,6 @@
   font-weight: 1000;
 }
 
-.comment {
-  padding: 0 1em;
-}
-
 .comment__body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -359,8 +356,8 @@
 }
 
 .comment__profile-pic {
-  width: 48px;
-  height: 48px;
+  width: 3em;
+  height: 3em;
   margin-top: 2em;
   border-radius: 100%;
 }
@@ -406,14 +403,64 @@
   background-color: #0095ff;
   border-radius: 0.35em;
   height: 3.5em;
-  font-size: 1em;
   margin-top: 1em;
+  margin-right: 0;
 }
 
-@media screen and (min-width: 401px) {
-  .comment {
-    padding: 0 2em;
-  }
+.thread__profile--pic {
+  width: 3em;
+  height: 3em;
+  margin-top: 1.25em;
+  border-radius: 100%;
+}
+
+.thread__response {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 2em;
+  padding-top: 2em;
+  border-bottom: #e1e1e1 0.75px solid;
+}
+
+.thread__content {
+  width: 82.5%;
+}
+
+.thread__user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 0.75em;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.thread__user--date {
+  font-weight: 100;
+  font-size: 0.9em;
+  color: silver;
+  margin: 0;
+}
+
+.thread__user--name {
+  margin: 0;
+}
+
+.thread__comment {
+  margin: 0;
+  font-weight: 100;
+  font-size: 0.9em;
+}
+
+@media screen and (min-width: 768px) {
   .comment__message {
     width: 95%;
     padding-left: 1em;
@@ -445,12 +492,90 @@
   .comment__button {
     width: 125px;
     height: 4em;
-    font-size: 0.7em;
     text-align: center;
     margin: 0;
   }
   .comment__profile-pic {
     margin-top: 1.6em;
+  }
+  .thread__content {
+    width: 90%;
+  }
+  .thread__profile--pic {
+    margin-right: 1em;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .thread__content {
+    width: 97.5%;
+  }
+}
+
+.main {
+  padding: 0 2em;
+}
+
+.next {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 2em 0;
+  overflow: hidden;
+}
+
+.next__thumbnail {
+  width: 150px;
+  height: 85px;
+  border-radius: 5%;
+}
+
+.next__info {
+  width: 80%;
+  padding-left: 1em;
+}
+
+.next__info--title {
+  font-size: 0.95em;
+  font-weight: 500;
+  color: #323232;
+  line-height: 1.5em;
+  margin: 0;
+  margin-top: 1em;
+}
+
+.next__info--channel {
+  font-weight: 100;
+  margin-top: 0.5em;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    padding: 2em;
+  }
+  .next__info {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0 10em;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .main__info {
+    width: 70%;
+    margin-right: 2em;
   }
 }
 
@@ -459,5 +584,13 @@
           box-sizing: border-box;
   overflow-x: hidden;
   font-family: avenir;
+}
+
+button {
+  border-style: none;
+}
+
+button:focus {
+  outline: 0;
 }
 /*# sourceMappingURL=App.css.map */

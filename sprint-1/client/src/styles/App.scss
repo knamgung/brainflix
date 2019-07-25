@@ -5,9 +5,17 @@
 @import "./partials/fonts.scss";
 @import "./partials/variables.scss";
 @import "./partials/comment.scss";
+@import "./partials/next.scss";
 
 * {
   box-sizing: border-box;
   overflow-x: hidden;
   font-family: avenir;
+}
+
+button {
+  border-style: none;
+  &:focus {
+    outline: 0;
+  }
 }

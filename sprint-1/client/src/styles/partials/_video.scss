@@ -20,7 +20,6 @@
 }
 
 .vid-head {
-  padding: $side-padding-phone;
   background-color: white;
   &__title {
     color: $black;
@@ -102,9 +101,8 @@
   }
 }
 
-@media screen and (min-width: 401px) {
+@media screen and (min-width: $tablet-media) {
   .vid-head {
-    padding: 0 $side-padding-tablet;
   }
   .video {
     &__player {
@@ -154,10 +152,16 @@
   }
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: $desktop-media) {
   .video {
     &__player {
       width: 1000px;
     }
+  }
+
+  .desc {
+    margin: 2em 0;
+    width: 60%;
+    font-size: 1.05em;
   }
 }

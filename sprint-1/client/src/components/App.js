@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import "../styles/App.css";
 import Nav from "./Nav.js";
 import MainVideo from "./MainVideo";
 import video from "../assets/Video/BrainStation Sample Video.mp4";
-import VideoHeader from "./VideoHeader";
-import Comments from "./Comments";
+import VideoHeader from "./VideoHeader.js";
+import Comments from "./Comments.js";
+import Next from "./Next.js";
 
 const videoDescription = {
   id: "1",
@@ -41,20 +42,78 @@ const videoDescription = {
         "How can someone be so good!!! You can tell he lives for this and loves to do it every day. Everytime I see him I feel instantly happy! He’s definitely my favorite ever!",
       id: "fb3a0c7b-2344-489b-b6f6-06e31978c704",
       likes: 0,
-      timestamp: 1530744138878
+      timestamp: 1530744338878
     }
   ]
 };
 
-function App() {
-  return (
-    <div>
-      <Nav />
-      <MainVideo video={videoDescription} />
-      <VideoHeader vidInfo={videoDescription} />
-      <Comments vidInfo={videoDescription} />
-    </div>
-  );
-}
+export default class App extends Component {
+  state = {
+    video: [
+      {
+        id: "1",
+        title: "Become A Travel Pro In One Easy Lession",
+        channel: "Bernice Lambert",
+        image: "./assets/Images/video-list-1.jpg"
+      },
+      {
+        id: "2",
+        title: "Les Houches The Hidden Gem Of The Chamonix",
+        channel: "Bernard Patrick",
+        image: "./assets/Images/video-list-2.jpg"
+      },
+      {
+        id: "3",
+        title: "Travel Health Useful Medical Information For",
+        channel: "Lizzie Burton",
+        image: "./assets/Images/video-list-3.jpg"
+      },
+      {
+        id: "4",
+        title: "Cheap Airline: Great Ways To Save",
+        channel: "Emily Harper",
+        image: "./assets/Images/video-list-4.jpg"
+      },
+      {
+        id: "5",
+        title: "Take A Romantic Break In A Boutique Hotel",
+        channel: "Ethan Owen",
+        image: "./assets/Images/video-list-5.jpg"
+      },
+      {
+        id: "6",
+        title: "Choose The Perfect Accomodations",
+        channel: "Lydia Perez",
+        image: "./assets/Images/video-list-6.jpg"
+      },
+      {
+        id: "7",
+        title: "Cruising Destination Ideas",
+        channel: "Timothy Austin",
+        image: "./assets/Images/video-list-7.jpg"
+      },
+      {
+        id: "8",
+        title: "Train Travel On Track For Safety",
+        channel: "Scotty Cranmer",
+        image: "./assets/Images/video-list-8.jpg"
+      }
+    ]
+  };
 
-export default App;
+  render() {
+    return (
+      <div>
+        <Nav />
+        <MainVideo video={videoDescription} />
+        <main className="main">
+          <div className="main__info">
+            <VideoHeader vidInfo={videoDescription} />
+            <Comments vidInfo={videoDescription} />
+          </div>
+          <Next vidList={this.state.video} />
+        </main>
+      </div>
+    );
+  }
+}

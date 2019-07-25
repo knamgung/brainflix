@@ -62,7 +62,7 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1440px) {
   .navbar {
     padding: 0 $side-padding-tablet;
     height: 5em;
@@ -86,7 +86,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
     padding: 0.75em $side-padding-phone;
@@ -104,7 +104,7 @@
     }
 
     &__search {
-      height: 3.75em;
+      height: 3em;
       padding-left: 35px;
 
       &--icon {
