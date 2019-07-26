@@ -22,7 +22,9 @@ function CommentCounter(props) {
 function CommentForm() {
   return (
     <div className="comment__body">
-      <img src={ProfilePic} className="comment__profile-pic" />
+      <div className="comment__profile">
+        <img src={ProfilePic} className="comment__profile--pic" />
+      </div>
       <CommentMessage />
     </div>
   );
@@ -61,7 +63,9 @@ function EachComment(props) {
   const commentContentList = props.comment.map(obj => {
     return (
       <card className="thread__response">
-        <img className="thread__profile--pic" src={ProfilePic} />
+        <div className="thread__profile">
+          <img className="thread__profile--pic" src={ProfilePic} />
+        </div>
         <div className="thread__content">
           <div className="thread__user">
             <p className="thread__user--name">{obj.name}</p>

@@ -21,7 +21,7 @@ function BrainflixLogo() {
 function Searchbar() {
   return (
     <form className="navbar__form">
-      <input className="navbar__search" />
+      <input className="navbar__search" placeholder="Search" />
       <img src={searchIcon} className="navbar__search--icon" />
     </form>
   );
@@ -33,7 +33,9 @@ function UploadProfile() {
       <button className="navbar__upload--button">
         <img src={IconUpload} /> UPLOAD
       </button>
-      <img src={ProfilePic} className="profile-pic" />
+      <div className="profile">
+        <img src={ProfilePic} className="profile-pic" />
+      </div>
     </div>
   );
 }

@@ -1,40 +1,52 @@
 @import "./mixin.scss";
 @import "./variables.scss";
-.profile-pic {
-  width: 3em;
-  height: 3em;
-  border-radius: 100%;
+
+.profile {
+  width: 5em;
+  display: flex;
+  justify-content: flex-end;
+
+  &-pic {
+    width: 3em;
+    height: 3em;
+    margin-top: 0.75em;
+    border-radius: 100%;
+  }
 }
 
 .navbar {
   display: flex;
   width: 100vw;
+  flex-direction: column;
   align-items: center;
-  height: 4em;
-  padding: 0 $side-padding-desktop;
+
+  height: 12em;
+  padding: 0 $side-padding-phone;
 
   &__logo {
-    margin-right: 1em;
+    width: 10em;
+    margin-top: 1em;
   }
 
   &__form {
     position: relative;
-    margin-left: auto;
-    width: 17%;
+    margin-top: 1em;
+    width: 100%;
   }
 
   &__search {
     height: $search-button-height;
-    padding-left: 30px;
+    padding-left: 40px;
     width: 100%;
+
     @include input;
 
     &--icon {
       position: absolute;
-      left: 0.5em;
-      top: 0.65em;
-      width: 0.75em;
-      height: 0.75em;
+      left: 1em;
+      top: 1em;
+      width: 0.95em;
+      height: 0.95em;
     }
   }
 
@@ -42,17 +54,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 12em;
+    width: 100%;
 
     &--button {
       height: $search-button-height;
       background-color: $bb-light-blue;
       color: white;
-      margin: 0 0 0 1em;
+      margin-top: 1em;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 10em;
+      width: 100%;
       border-radius: 0.35em;
 
       & img {
@@ -62,21 +75,44 @@
   }
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (min-width: $tablet-media) {
+  .profile {
+    &-pic {
+      margin-top: 0;
+    }
+  }
+
   .navbar {
     padding: 0 $side-padding-tablet;
     height: 5em;
+    flex-flow: row;
+    align-items: center;
+
+    &__logo {
+      margin-top: 0;
+    }
 
     &__form {
       width: 25%;
+      margin-left: auto;
+      margin-right: 1em;
+      margin-top: 0;
+    }
+
+    &__search {
+      height: $search-button-height-tab;
+
+      &--icon {
+        top: 0.7em;
+      }
     }
 
     &__upload {
       width: 9.5em;
       &--button {
-        width: 7.5em;
-        margin-right: 0.5em;
-
+        width: 9.5em;
+        margin: 0;
+        height: $search-button-height-tab;
         & img {
           width: 1em;
           height: 1em;
@@ -86,46 +122,8 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: $desktop-media) {
   .navbar {
-    flex-direction: column;
-    padding: 0.75em $side-padding-phone;
-    height: 10em;
-
-    justify-content: space-around;
-    &__logo {
-      width: 40%;
-      margin-right: 0;
-      margin-bottom: 0.5em;
-    }
-
-    &__form {
-      width: 100%;
-    }
-
-    &__search {
-      height: 3em;
-      padding-left: 35px;
-
-      &--icon {
-        width: 1em;
-        height: 1em;
-        left: 0.75em;
-        top: 0.75em;
-      }
-    }
-
-    &__upload {
-      width: 100%;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.5em;
-      &--button {
-        height: 3.5em;
-        font-size: 0.9em;
-        width: 80%;
-        margin: 0;
-      }
-    }
+    padding: 0 $side-padding-desktop;
   }
 }

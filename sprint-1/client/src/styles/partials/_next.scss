@@ -2,25 +2,38 @@
 @import "./variables.scss";
 @import "./colour.scss";
 
-.main {
-  padding: 0 $side-padding-tablet;
+.next-title {
+  margin: 2em 0;
+  color: $silver;
 }
 
 .next {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 2em 0;
+  margin: 1.7em 0 0 0;
   overflow: hidden;
+  &:hover {
+    transition: 0.5s;
+    margin-left: 0.25em;
+  }
+
   &__thumbnail {
-    width: 150px;
-    height: 85px;
-    border-radius: 5%;
+    width: 175px;
+
+    &--pic {
+      width: 125px;
+      height: 75px;
+      border-radius: 5%;
+    }
   }
 
   &__info {
-    width: 80%;
-    padding-left: 1em;
+    width: 100%;
+    padding-left: 0.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
     &--title {
       font-size: 0.95em;
@@ -28,36 +41,36 @@
       color: $black;
       line-height: 1.5em;
       margin: 0;
-      margin-top: 1em;
     }
 
     &--channel {
       font-weight: 100;
+      font-size: 0.85em;
       margin-top: 0.5em;
     }
   }
 }
 
 @media screen and (min-width: $tablet-media) {
-  .main {
-    padding: $side-padding-tablet;
-  }
-
   .next {
     &__info {
-      width: 90%;
+      width: 100%;
     }
   }
 }
-
 @media screen and (min-width: $desktop-media) {
-  .main {
-    display: flex;
-    padding: 0 $side-padding-desktop;
-    align-items: flex-start;
+  .next {
+    &__thumbnail {
+      width: 200px;
+    }
     &__info {
-      width: 70%;
-      margin-right: 2em;
+      &--title {
+        font-size: 0.95em;
+      }
+
+      &--channel {
+        font-size: 1em;
+      }
     }
   }
 }

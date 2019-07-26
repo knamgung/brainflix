@@ -6,6 +6,7 @@ import video from "../assets/Video/BrainStation Sample Video.mp4";
 import VideoHeader from "./VideoHeader.js";
 import Comments from "./Comments.js";
 import Next from "./Next.js";
+import Main from "./Main.js";
 
 const videoDescription = {
   id: "1",
@@ -106,13 +107,7 @@ export default class App extends Component {
       <div>
         <Nav />
         <MainVideo video={videoDescription} />
-        <main className="main">
-          <div className="main__info">
-            <VideoHeader vidInfo={videoDescription} />
-            <Comments vidInfo={videoDescription} />
-          </div>
-          <Next vidList={this.state.video} />
-        </main>
+        <Main vidInfo={videoDescription} vidList={this.state.video} />
       </div>
     );
   }
