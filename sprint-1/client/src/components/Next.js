@@ -10,9 +10,9 @@ export default function Next(props) {
 }
 
 function CreateNextVid(props) {
-  const createCard = props.vidList.map(obj => {
+  const createCard = props.vidList.map((obj, i) => {
     return (
-      <card className="next">
+      <section className="next" key={i + "-next-video"}>
         <div className="next__thumbnail">
           <img
             src={obj.image}
@@ -24,7 +24,7 @@ function CreateNextVid(props) {
           <h5 className="next__info--title">{obj.title}</h5>
           <p className="next__info--channel">{obj.channel}</p>
         </div>
-      </card>
+      </section>
     );
   });
 

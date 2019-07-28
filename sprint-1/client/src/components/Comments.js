@@ -102,7 +102,7 @@ function EachComment(props) {
 
   let commentContentList = props.comments.map((obj, i) => {
     return (
-      <card className="thread__response" id={i + "-comment"}>
+      <section className="thread__response" key={i + "-comment"}>
         <div className="thread__profile">
           <img
             className="thread__profile--pic"
@@ -117,7 +117,7 @@ function EachComment(props) {
           </div>
           <p className="thread__comment">{obj.comment}</p>
         </div>
-      </card>
+      </section>
     );
   });
 
