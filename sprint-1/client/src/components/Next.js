@@ -14,7 +14,11 @@ function CreateNextVid(props) {
     return (
       <card className="next">
         <div className="next__thumbnail">
-          <img src={obj.image} className="next__thumbnail--pic" />
+          <img
+            src={obj.image}
+            className="next__thumbnail--pic"
+            alt={obj.title + "-thumbnail-image"}
+          />
         </div>
         <div className="next__info">
           <h5 className="next__info--title">{obj.title}</h5>

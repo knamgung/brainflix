@@ -1,53 +1,92 @@
-import React from "react";
+import React, { Component } from "react";
 
 import ProfilePic from "../assets/Images/Mohan-muruge.jpg";
+import AnonPic from "../assets/Images/anonymous.jpg";
 
 export default function Comments(props) {
   return (
     <div className="comment">
-      <CommentCounter vidInfo={props.vidInfo} />
-      <CommentForm />
-      <EachComment comment={props.vidInfo.comments} />
+      <CommentCounter commentCounter={props.commentCounter} />
+      <CommentForm pushComment={props.pushComment} vidInfo={props.vidInfo} />
+      <EachComment comments={props.vidInfo.comments} />
     </div>
   );
 }
 
 function CommentCounter(props) {
-  let numComments = props.vidInfo.comments.length;
-  let commentCounter = numComments + " Comments";
-
-  return <h3 className="comment__counter">{commentCounter}</h3>;
+  let commentCount = props.commentCounter + " Comments";
+  return <h3 className="comment__counter">{commentCount}</h3>;
 }
 
-function CommentForm() {
+function CommentForm(props) {
   return (
     <div className="comment__body">
       <div className="comment__profile">
-        <img src={ProfilePic} className="comment__profile--pic" />
+        <img
+          src={ProfilePic}
+          className="comment__profile--pic"
+          alt="profile-pic"
+        />
       </div>
-      <CommentMessage />
+      <CommentMessage pushComment={props.pushComment} vidInfo={props.vidInfo} />
     </div>
   );
 }
 
-function CommentMessage() {
-  return (
-    <div className="comment__message">
-      <p className="comment__title"> JOIN THE CONVERSATION</p>
+class CommentMessage extends Component {
+  state = {
+    name: "Mohan Muruge",
+    comment: null,
+    id: null,
+    likes: 0,
+    timestamp: null
+  };
 
-      <form className="comment__form">
-        <textarea
-          type="text"
-          name="fname"
-          className="comment__write"
-          placeholder="Add a new comment"
-          wrap="soft"
-          required
-        />
-        <button className="comment__button">COMMENT</button>
-      </form>
-    </div>
-  );
+  handleComment = event => {
+    this.setState({
+      comment: event.target.value,
+      timestamp: Date.now(),
+      id: Math.random()
+    });
+  };
+
+  commentSubmit = event => {
+    event.preventDefault();
+
+    this.props.pushComment(this.state, this.props.vidInfo.comments);
+    event.target.reset();
+  };
+
+  submitEnter = event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+
+      this.props.pushComment(this.state, this.props.vidInfo.comments);
+      event.target.value = "";
+    }
+  };
+
+  render() {
+    return (
+      <div className="comment__message">
+        <p className="comment__title"> JOIN THE CONVERSATION</p>
+
+        <form className="comment__form" onSubmit={this.commentSubmit}>
+          <textarea
+            type="text"
+            name="fname"
+            className="comment__write"
+            placeholder="Add a new comment"
+            wrap="soft"
+            onChange={this.handleComment}
+            onKeyDown={this.submitEnter}
+            required
+          />
+          <button className="comment__button">COMMENT</button>
+        </form>
+      </div>
+    );
+  }
 }
 
 function EachComment(props) {
@@ -60,11 +99,16 @@ function EachComment(props) {
       properMonth + "/" + properDate + "/" + convertDate.getFullYear();
     return timestamp;
   };
-  const commentContentList = props.comment.map(obj => {
+
+  let commentContentList = props.comments.map(obj => {
     return (
       <card className="thread__response">
         <div className="thread__profile">
-          <img className="thread__profile--pic" src={ProfilePic} />
+          <img
+            className="thread__profile--pic"
+            src={AnonPic}
+            alt={obj.name + "-profile-pic"}
+          />
         </div>
         <div className="thread__content">
           <div className="thread__user">
@@ -79,9 +123,3 @@ function EachComment(props) {
 
   return <div className="thread">{commentContentList}</div>;
 }
-
-// class LoadComments extends Component {
-//   render() {
-//     return <div />;
-//   }
-// }

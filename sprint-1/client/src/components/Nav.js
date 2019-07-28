@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import logo from "../assets/Logo/Logo-brainflix.svg";
 import IconUpload from "../assets/Icons/PNG/Icon-upload.png";
 import ProfilePic from "../assets/Images/Mohan-muruge.jpg";
@@ -22,7 +22,11 @@ function Searchbar() {
   return (
     <form className="navbar__form">
       <input className="navbar__search" placeholder="Search" />
-      <img src={searchIcon} className="navbar__search--icon" />
+      <img
+        src={searchIcon}
+        className="navbar__search--icon"
+        alt="search-icon"
+      />
     </form>
   );
 }
@@ -31,10 +35,10 @@ function UploadProfile() {
   return (
     <div className="navbar__upload">
       <button className="navbar__upload--button">
-        <img src={IconUpload} /> UPLOAD
+        <img src={IconUpload} alt="upload-icon" /> UPLOAD
       </button>
       <div className="profile">
-        <img src={ProfilePic} className="profile-pic" />
+        <img src={ProfilePic} className="profile-pic" alt="profile-pic" />
       </div>
     </div>
   );

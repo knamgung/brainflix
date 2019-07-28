@@ -49,35 +49,13 @@ function ViewsLikes(props) {
   return (
     <div className="stats">
       <div className="views">
-        <img src={Views} className="views__icon" />
+        <img src={Views} className="views__icon" alt="views-icon" />
         <p className="views__counter">{viewNum}</p>
       </div>
       <div className="likes">
-        <img src={Heart} className="likes__icon" />
+        <img src={Heart} className="likes__icon" alt="likes-icon" />
         <p className="likes__counter">{likes}</p>
       </div>
     </div>
   );
 }
-
-// const numFormatter = strNum => {
-//   const numCommas = strNum.length / 3;
-//   const numExtra = strNum.length % 3;
-//   const iteration = strNum.length;
-//   let changedNum = "";
-
-//   console.log(iteration);
-
-//   if (strNum.length > 3) {
-//     for (let i = iteration; i > 0; i = i - 1) {
-//       if ((iteration - i) % 3 === 0 && (iteration - i) % 3 > 0) {
-//         changedNum = "," + strNum.substring(i - 3, i) + changedNum;
-//         i -= 2;
-//       } else {
-//         changedNum = strNum.substring(i - 1, i) + changedNum;
-//       }
-//       console.log(i);
-//       return changedNum;
-//     }
-//   }
-// };
