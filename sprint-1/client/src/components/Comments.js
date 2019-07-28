@@ -53,7 +53,7 @@ class CommentMessage extends Component {
   commentSubmit = event => {
     event.preventDefault();
 
-    this.props.pushComment(this.state, this.props.vidInfo.comments);
+    this.props.pushComment(this.state);
     event.target.reset();
   };
 
@@ -100,9 +100,9 @@ function EachComment(props) {
     return timestamp;
   };
 
-  let commentContentList = props.comments.map(obj => {
+  let commentContentList = props.comments.map((obj, i) => {
     return (
-      <card className="thread__response">
+      <card className="thread__response" id={i + "-comment"}>
         <div className="thread__profile">
           <img
             className="thread__profile--pic"

@@ -1,7 +1,7 @@
 @import "./colour.scss";
 @import "./mixin.scss";
 @import "./variables.scss";
-
+@import "./animations.scss";
 .comment {
   &__body {
     display: flex;
@@ -71,6 +71,7 @@
     padding-bottom: 2em;
     padding-top: 2em;
     border-bottom: $mercury 0.75px solid;
+    animation: fade-in 0.6s ease-in;
   }
   &__content {
     width: 100%;
