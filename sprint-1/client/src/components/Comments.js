@@ -6,7 +6,7 @@ import AnonPic from "../assets/Images/anonymous.jpg";
 export default function Comments(props) {
   return (
     <div className="comment">
-      <CommentCounter commentCounter={props.commentCounter} />
+      <CommentCounter commentCounter={props.vidInfo} />
       <CommentForm pushComment={props.pushComment} vidInfo={props.vidInfo} />
       <EachComment comments={props.vidInfo.comments} />
     </div>
@@ -14,7 +14,7 @@ export default function Comments(props) {
 }
 
 function CommentCounter(props) {
-  let commentCount = props.commentCounter + " Comments";
+  let commentCount = props.commentCounter.comments.length + " Comments";
   return <h3 className="comment__counter">{commentCount}</h3>;
 }
 
@@ -94,32 +94,35 @@ function EachComment(props) {
   const timestamp = time => {
     const convertDate = new Date(time);
     const properMonth = convertDate.getMonth() + 1;
-    const properDate = convertDate.getDate() + 1;
+    const properDate = convertDate.getDate();
     const timestamp =
       properMonth + "/" + properDate + "/" + convertDate.getFullYear();
     return timestamp;
   };
 
-  let commentContentList = props.comments.map((obj, i) => {
-    return (
-      <section className="thread__response" key={i + "-comment"}>
-        <div className="thread__profile">
-          <img
-            className="thread__profile--pic"
-            src={AnonPic}
-            alt={obj.name + "-profile-pic"}
-          />
-        </div>
-        <div className="thread__content">
-          <div className="thread__user">
-            <p className="thread__user--name">{obj.name}</p>
-            <p className="thread__user--date">{timestamp(obj.timestamp)}</p>
+  let commentContentList = props.comments
+    .slice()
+    .reverse()
+    .map((obj, i) => {
+      return (
+        <section className="thread__response" key={i + "-comment"}>
+          <div className="thread__profile">
+            <img
+              className="thread__profile--pic"
+              src={AnonPic}
+              alt={obj.name + "-profile-pic"}
+            />
           </div>
-          <p className="thread__comment">{obj.comment}</p>
-        </div>
-      </section>
-    );
-  });
+          <div className="thread__content">
+            <div className="thread__user">
+              <p className="thread__user--name">{obj.name}</p>
+              <p className="thread__user--date">{timestamp(obj.timestamp)}</p>
+            </div>
+            <p className="thread__comment">{obj.comment}</p>
+          </div>
+        </section>
+      );
+    });
 
   return <div className="thread">{commentContentList}</div>;
 }

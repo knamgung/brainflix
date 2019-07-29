@@ -96,18 +96,14 @@ export default class App extends Component {
           timestamp: 1530744338878
         }
       ]
-    },
-    commentCounter: 3
+    }
   };
   pushComment = comment => {
     let mainVideo = this.state.mainVideo;
-    this.state.mainVideo.comments.unshift(comment);
-
-    let count = this.state.mainVideo.comments.length;
+    this.state.mainVideo.comments.push(comment);
 
     this.setState({
-      mainVideo: mainVideo,
-      commentCounter: count
+      mainVideo: mainVideo
     });
   };
 
