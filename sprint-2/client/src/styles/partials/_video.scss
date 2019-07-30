@@ -1,0 +1,170 @@
+@import "./colour.scss";
+@import "./mixin.scss";
+@import "./variables.scss";
+
+.video {
+  width: 100%;
+  background-color: black;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: flex-start;
+
+  &__player {
+    width: 100%;
+  }
+
+  &__info {
+    border-bottom: 1.4px solid $mercury;
+  }
+}
+
+.vid-head {
+  background-color: white;
+  &__title {
+    color: $black;
+  }
+}
+
+.info,
+.views,
+.likes {
+  display: flex;
+}
+
+.info {
+  align-items: baseline;
+
+  &__author {
+    margin: 0;
+    padding-right: 0.75em;
+    font-size: 1.15em;
+    font-weight: 500;
+    color: $black;
+  }
+
+  &__date {
+    margin: 0;
+    padding-right: 1em;
+    font-weight: 100;
+    font-size: 1em;
+    color: $silver;
+  }
+}
+
+.stats {
+  display: flex;
+  margin-top: 2.25em;
+  padding-bottom: 1.5em;
+}
+
+.views {
+  margin-right: 2em;
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    width: 1.55em;
+    height: 1.55em;
+    margin-right: 0.75em;
+  }
+
+  &__counter {
+    margin: 0;
+    font-weight: 100;
+  }
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+
+  &__icon {
+    width: 1.55em;
+    height: 1.55em;
+    margin-right: 0.75em;
+  }
+
+  &__counter {
+    margin: 0;
+    font-weight: 100;
+  }
+}
+
+.desc {
+  margin-top: 1em;
+  font-weight: 300;
+  color: $black;
+
+  &__body {
+    font-size: 1.25em;
+  }
+}
+
+@media screen and (min-width: $tablet-media) {
+  .video {
+    &__player {
+      width: 600px;
+    }
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 2em;
+      align-items: center;
+    }
+  }
+  .stats {
+    margin-top: 0;
+    padding-bottom: 0;
+
+    .views {
+      margin-right: 1.25em;
+      &__icon {
+        width: 1.15em;
+        height: 1.15em;
+      }
+
+      &__counter {
+        font-size: 0.75em;
+      }
+    }
+
+    .likes {
+      &__icon {
+        width: 1.15em;
+        height: 1.15em;
+      }
+
+      &__counter {
+        font-size: 0.75em;
+      }
+    }
+  }
+
+  .desc {
+    &__body {
+      line-height: 1.25em;
+      font-size: 1em;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-media) {
+  .video {
+    &__player {
+      width: 1000px;
+    }
+  }
+
+  .desc {
+    margin: 2em 0;
+    width: 75%;
+    font-size: 1.05em;
+  }
+
+  .likes {
+    margin-right: 1em;
+  }
+}
