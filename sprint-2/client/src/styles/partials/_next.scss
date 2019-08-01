@@ -13,9 +13,11 @@
   align-items: center;
   margin: 1.7em 0 0 0;
   overflow: hidden;
+  animation: fade-in 1s ease-in;
+
   &:hover {
     transition: 0.5s;
-    margin-left: 0.25em;
+    transform: translateX(2em);
   }
 
   &__thumbnail {

@@ -18,9 +18,9 @@
 
 @keyframes margin-shift {
   from {
-    margin-right: 0em;
+    transform: translateX(0);
   }
   to {
-    margin-right: 2em;
+    transform: translateX(1px);
   }
 }

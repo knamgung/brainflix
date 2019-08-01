@@ -62,7 +62,7 @@
 .navbar__search--icon {
   position: absolute;
   left: 1em;
-  top: 1em;
+  top: 1.3em;
   width: 0.95em;
   height: 0.95em;
 }
@@ -81,12 +81,12 @@
 }
 
 .navbar__upload--button {
-  height: 3em;
+  height: 2.5em;
   background-color: #0095ff;
   color: white;
   margin-top: 1em;
   border-radius: 0.35em;
-  font-size: 1em;
+  font-size: 1.3em;
   width: 100%;
 }
 
@@ -140,16 +140,16 @@
     width: 95%;
   }
   .navbar__search--icon {
-    top: 1.25em;
+    top: 1.4em;
   }
   .navbar__upload {
-    width: 9.5em;
+    width: 12em;
   }
   .navbar__upload--button {
     width: 100%;
     margin: 0;
-    height: 5em;
-    font-size: 0.67em;
+    height: 3em;
+    font-size: 1.2em;
   }
   .navbar__upload--button img {
     width: 1em;
@@ -183,7 +183,7 @@
 }
 
 .video__info {
-  border-bottom: 1.4px solid #e1e1e1;
+  border-bottom: 1.5px solid #e1e1e1;
 }
 
 .vid-head {
@@ -401,19 +401,23 @@
 
 @-webkit-keyframes margin-shift {
   from {
-    margin-right: 0em;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
   to {
-    margin-right: 2em;
+    -webkit-transform: translateX(1px);
+            transform: translateX(1px);
   }
 }
 
 @keyframes margin-shift {
   from {
-    margin-right: 0em;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
   to {
-    margin-right: 2em;
+    -webkit-transform: translateX(1px);
+            transform: translateX(1px);
   }
 }
 
@@ -628,12 +632,15 @@
           align-items: center;
   margin: 1.7em 0 0 0;
   overflow: hidden;
+  -webkit-animation: fade-in 1s ease-in;
+          animation: fade-in 1s ease-in;
 }
 
 .next:hover {
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  margin-left: 0.25em;
+  -webkit-transform: translateX(2em);
+          transform: translateX(2em);
 }
 
 .next__thumbnail {
@@ -715,9 +722,12 @@
             align-items: flex-start;
   }
   .main__info {
-    width: 85%;
+    width: 1400px;
     margin-right: 2em;
-    border-right: #e1e1e1 0.75px solid;
+    border-right: #e1e1e1 1.5px solid;
+  }
+  .main__next {
+    width: 700px;
   }
 }
 
@@ -743,10 +753,12 @@
 
 @keyframes margin-shift {
   from {
-    margin-right: 0em;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
   to {
-    margin-right: 2em;
+    -webkit-transform: translateX(1px);
+            transform: translateX(1px);
   }
 }
 
@@ -950,5 +962,11 @@ button {
 
 button:focus {
   outline: 0;
+}
+
+a {
+  -webkit-text-emphasis: none;
+          text-emphasis: none;
+  text-decoration: none;
 }
 /*# sourceMappingURL=App.css.map */

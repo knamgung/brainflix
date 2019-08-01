@@ -20,9 +20,13 @@
     padding: 0 $side-padding-desktop;
     align-items: flex-start;
     &__info {
-      width: 85%;
+      width: 1400px;
       margin-right: 2em;
-      border-right: $mercury 0.75px solid;
+      border-right: $mercury 1.5px solid;
+    }
+
+    &__next {
+      width: 700px;
     }
   }
 }
