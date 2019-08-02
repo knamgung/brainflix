@@ -1,37 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Next(props) {
+export default function Next({ videos, currentId }) {
   return (
     <div className="main__next">
       <h5 className="next-title">Next Video</h5>
-      <CreateNextVid
-        vidList={props.vidList}
-        currentId={props.currentId}
-        renderNewVid={props.renderNewVid}
-      />
+      <CreateNextVid videos={videos} currentId={currentId} />
     </div>
   );
 }
 
-function CreateNextVid(props) {
-  const filterCurrentVid = props.vidList.filter(
-    obj => obj.id !== props.currentId
-  );
+function CreateNextVid({ videos, currentId }) {
+  const filterCurrentVid = videos.filter(obj => obj.id !== currentId);
   const createCard = filterCurrentVid.map(obj => {
+    let { id, image, title, channel } = obj;
     return (
-      <Link to={`/videos/${obj.id}`} key={obj.id}>
+      <Link to={`/videos/${id}`} key={id}>
         <section className="next">
           <div className="next__thumbnail">
             <img
-              src={obj.image}
+              src={image}
               className="next__thumbnail--pic"
-              alt={obj.title + "-thumbnail-image"}
+              alt={title + "-thumbnail-image"}
             />
           </div>
           <div className="next__info">
-            <h5 className="next__info--title">{obj.title}</h5>
-            <p className="next__info--channel">{obj.channel}</p>
+            <h5 className="next__info--title">{title}</h5>
+            <p className="next__info--channel">{channel}</p>
           </div>
         </section>
       </Link>

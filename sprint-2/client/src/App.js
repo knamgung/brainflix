@@ -20,7 +20,7 @@ class App extends Component {
       mainVideo: {},
       isLoading: true,
       firstLoad: true,
-      currentId: this.props.location.pathname.substring(8),
+      currentId: "",
       whichLoad: loadAnimation,
       currentUser: {
         name: "Mohan Muruge",
@@ -30,8 +30,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    localStorage.setItem("initId", "1af0jruup5gu");
     if (this.state.currentId === "") {
-      this.renderData("1af0jruup5gu");
+      this.renderData(localStorage["initId"]);
     } else {
       this.renderData(this.state.currentId);
     }
@@ -50,14 +51,14 @@ class App extends Component {
           ],
 
           [
-            axios.get(`${apiUrl}/videos/${id}${apiKey}`).then(response =>
+            axios.get(`${apiUrl}/videos/${id}${apiKey}`).then(response => {
               this.setState({
                 mainVideo: response.data,
                 currentId: response.data.id,
                 isLoading: false,
                 firstLoad: false
-              })
-            )
+              });
+            })
           ]
         ),
       2750
@@ -89,7 +90,7 @@ class App extends Component {
         `${apiUrl}/videos/${this.state.currentId}/comments${apiKey}`,
         comment
       )
-      .then(response => {
+      .then(() => {
         axios
           .get(`${apiUrl}/videos/${this.state.currentId}${apiKey}`)
           .then(response => {
@@ -101,12 +102,13 @@ class App extends Component {
   };
 
   render() {
+    let { mainVideo, videos, currentUser } = this.state;
     return (
       <div>
         <Nav />
         {this.state.isLoading ? (
           <div class="loading">
-            <img src={this.state.whichLoad} />
+            <img src={this.state.whichLoad} alt="loading-animation" />
           </div>
         ) : (
           <Switch>
@@ -115,23 +117,16 @@ class App extends Component {
             <Route
               path="/videos/:id"
               render={props => {
-                const findVideo = this.state.videos.find(video => {
-                  return (
-                    video.id.toLowerCase() ===
-                    props.match.params.id.toLowerCase()
-                  );
-                });
-
+                console.log(mainVideo);
                 return (
                   <Main
-                    vidInfo={this.state.mainVideo}
-                    vidList={this.state.videos}
+                    mainVideo={mainVideo}
+                    videos={videos}
                     pushComment={this.pushComment}
-                    commentCounter={this.state.commentCounter}
                     currentId={props.match.params.id}
                     renderNewVid={this.renderNewVideo}
                     renderData={this.renderData}
-                    currentUser={this.state.currentUser}
+                    currentUser={currentUser}
                   />
                 );
               }}
@@ -142,14 +137,13 @@ class App extends Component {
               render={() => {
                 return (
                   <Main
-                    vidInfo={this.state.mainVideo}
-                    vidList={this.state.videos}
+                    mainVideo={mainVideo}
+                    videos={videos}
                     pushComment={this.pushComment}
-                    commentCounter={this.state.commentCounter}
-                    currentId={"1af0jruup5gu"}
+                    currentId={localStorage["initId"]}
                     renderNewVid={this.renderNewVideo}
                     renderData={this.renderData}
-                    currentUser={this.state.currentUser}
+                    currentUser={currentUser}
                   />
                 );
               }}

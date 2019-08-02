@@ -3,29 +3,26 @@ import React, { Component } from "react";
 import ProfilePic from "../assets/Images/Mohan-muruge.jpg";
 import AnonPic from "../assets/Images/anonymous.jpg";
 
-export default function Comments(props) {
+export default function Comments({ mainVideo, pushComment, currentUser }) {
   return (
     <div className="comment">
-      <CommentCounter commentCounter={props.vidInfo} />
+      <CommentCounter mainVideo={mainVideo} />
       <CommentForm
-        pushComment={props.pushComment}
-        vidInfo={props.vidInfo}
-        currentUser={props.currentUser}
+        pushComment={pushComment}
+        mainVideo={mainVideo}
+        currentUser={currentUser}
       />
-      <EachComment
-        comments={props.vidInfo.comments}
-        currentUser={props.currentUser}
-      />
+      <EachComment comments={mainVideo.comments} currentUser={currentUser} />
     </div>
   );
 }
 
-function CommentCounter(props) {
-  let commentCount = props.commentCounter.comments.length + " Comments";
+function CommentCounter({ mainVideo }) {
+  let commentCount = mainVideo.comments.length + " Comments";
   return <h3 className="comment__counter">{commentCount}</h3>;
 }
 
-function CommentForm(props) {
+function CommentForm({ pushComment, mainVideo, currentUser }) {
   return (
     <div className="comment__body">
       <div className="comment__profile">
@@ -36,9 +33,9 @@ function CommentForm(props) {
         />
       </div>
       <CommentMessage
-        pushComment={props.pushComment}
-        vidInfo={props.vidInfo}
-        currentUser={props.currentUser}
+        pushComment={pushComment}
+        mainVideo={mainVideo}
+        currentUser={currentUser}
       />
     </div>
   );
@@ -67,7 +64,7 @@ class CommentMessage extends Component {
     if (event.key === "Enter") {
       event.preventDefault();
 
-      this.props.pushComment(this.state, this.props.vidInfo.comments);
+      this.props.pushComment(this.state, this.props.mainVideo.comments);
       event.target.value = "";
     }
   };
@@ -103,40 +100,69 @@ function commentPic(user, commentName) {
   }
 }
 
-function EachComment(props) {
-  // const commentList = props.comment.map()
-  const timestamp = time => {
-    const convertDate = new Date(time);
-    const properMonth = convertDate.getMonth() + 1;
-    const properDate = convertDate.getDate();
-    const timestamp =
-      properMonth + "/" + properDate + "/" + convertDate.getFullYear();
-    return timestamp;
+class EachComment extends Component {
+  state = {
+    display: "none",
+    color: "red",
+    fontWeight: "500",
+    fontSize: "0.75em",
+    paddingLeft: "0.5em"
   };
 
-  let commentContentList = props.comments
-    .slice()
-    .reverse()
-    .map((obj, i) => {
-      return (
-        <section className="thread__response" key={i + "-comment"}>
-          <div className="thread__profile">
-            <img
-              className="thread__profile--pic"
-              src={commentPic(props.currentUser, obj.name)}
-              alt={obj.name + "-profile-pic"}
-            />
-          </div>
-          <div className="thread__content">
-            <div className="thread__user">
-              <p className="thread__user--name">{obj.name}</p>
-              <p className="thread__user--date">{timestamp(obj.timestamp)}</p>
-            </div>
-            <p className="thread__comment">{obj.comment}</p>
-          </div>
-        </section>
-      );
+  displayDelete(id, comments) {
+    const idMatch = comments.find(comment => {
+      return id === comment.id;
     });
 
-  return <div className="thread">{commentContentList}</div>;
+    this.setState({
+      display: "initial"
+    });
+  }
+
+  render() {
+    const timestamp = time => {
+      const convertDate = new Date(time);
+      const properMonth = convertDate.getMonth() + 1;
+      const properDate = convertDate.getDate();
+      const timestamp =
+        properMonth + "/" + properDate + "/" + convertDate.getFullYear();
+      return timestamp;
+    };
+
+    let commentContentList = this.props.comments
+      .slice()
+      .reverse()
+      .map((obj, i) => {
+        return (
+          <section
+            className="thread__response"
+            key={obj.id}
+            onMouseEnter={() => {
+              this.displayDelete(obj.id, commentContentList);
+            }}
+          >
+            <div className="thread__profile">
+              <img
+                className="thread__profile--pic"
+                src={commentPic(this.props.currentUser, obj.name)}
+                alt={obj.name + "-profile-pic"}
+              />
+            </div>
+
+            <div className="thread__content">
+              <div className="thread__user">
+                <p className="thread__user--name">
+                  {obj.name}
+                  <span style={this.state}>Delete Comment</span>
+                </p>
+                <p className="thread__user--date">{timestamp(obj.timestamp)}</p>
+              </div>
+              <p className="thread__comment">{obj.comment}</p>
+            </div>
+          </section>
+        );
+      });
+
+    return <div className="thread">{commentContentList}</div>;
+  }
 }
