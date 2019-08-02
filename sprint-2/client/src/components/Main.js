@@ -35,6 +35,7 @@ export default class Main extends Component {
             vidInfo={this.props.vidInfo}
             pushComment={this.props.pushComment}
             commentCounter={this.props.commentCounter}
+            currentUser={this.props.currentUser}
           />
           <Next
             vidList={this.props.vidList}
@@ -55,6 +56,7 @@ function MainInfo(props) {
         vidInfo={props.vidInfo}
         pushComment={props.pushComment}
         commentCounter={props.commentCounter}
+        currentUser={props.currentUser}
       />
     </div>
   );

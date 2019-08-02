@@ -7,8 +7,15 @@ export default function Comments(props) {
   return (
     <div className="comment">
       <CommentCounter commentCounter={props.vidInfo} />
-      <CommentForm pushComment={props.pushComment} vidInfo={props.vidInfo} />
-      <EachComment comments={props.vidInfo.comments} />
+      <CommentForm
+        pushComment={props.pushComment}
+        vidInfo={props.vidInfo}
+        currentUser={props.currentUser}
+      />
+      <EachComment
+        comments={props.vidInfo.comments}
+        currentUser={props.currentUser}
+      />
     </div>
   );
 }
@@ -28,25 +35,24 @@ function CommentForm(props) {
           alt="profile-pic"
         />
       </div>
-      <CommentMessage pushComment={props.pushComment} vidInfo={props.vidInfo} />
+      <CommentMessage
+        pushComment={props.pushComment}
+        vidInfo={props.vidInfo}
+        currentUser={props.currentUser}
+      />
     </div>
   );
 }
 
 class CommentMessage extends Component {
   state = {
-    name: "Mohan Muruge",
-    comment: null,
-    id: null,
-    likes: 0,
-    timestamp: null
+    name: this.props.currentUser.name,
+    comment: null
   };
 
   handleComment = event => {
     this.setState({
-      comment: event.target.value,
-      timestamp: Date.now(),
-      id: Math.random()
+      comment: event.target.value
     });
   };
 
@@ -89,6 +95,14 @@ class CommentMessage extends Component {
   }
 }
 
+function commentPic(user, commentName) {
+  if (user.name === commentName) {
+    return user.image;
+  } else {
+    return AnonPic;
+  }
+}
+
 function EachComment(props) {
   // const commentList = props.comment.map()
   const timestamp = time => {
@@ -109,7 +123,7 @@ function EachComment(props) {
           <div className="thread__profile">
             <img
               className="thread__profile--pic"
-              src={AnonPic}
+              src={commentPic(props.currentUser, obj.name)}
               alt={obj.name + "-profile-pic"}
             />
           </div>

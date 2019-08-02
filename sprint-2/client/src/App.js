@@ -6,6 +6,11 @@ import Main from "./components/Main.js";
 import { Switch, Route, withRouter } from "react-router-dom";
 import axios from "axios";
 
+import loadAnimation from "./assets/animation/bf.gif";
+import vidLoading from "./assets/animation/vidBF.gif";
+const apiKey = "?api_key=c03185ad-ce89-4771-aa63-e418f96376b0";
+const apiUrl = "https://project-2-api.herokuapp.com";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +19,13 @@ class App extends Component {
       videos: [],
       mainVideo: {},
       isLoading: true,
-      currentId: this.props.location.pathname.substring(8)
+      firstLoad: true,
+      currentId: this.props.location.pathname.substring(8),
+      whichLoad: loadAnimation,
+      currentUser: {
+        name: "Mohan Muruge",
+        image: "../assets/Images/Mohan-muruge.jpg"
+      }
     };
   }
 
@@ -26,71 +37,67 @@ class App extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log(this.match);
-  //   if (this.state.currentId !== this.props.match.params.id) {
-  //     axios
-  //       .get(
-  //         `https://project-2-api.herokuapp.com/videos/${
-  //           this.state.currentId
-  //         }?api_key="123`
-  //       )
-  //       .then(response =>
-  //         this.setState({
-  //           mainVideo: response.data
-  //         })
-  //       );
-  //   }
-  // }
-
   renderData(id) {
-    axios.all(
-      [
-        axios
-          .get('https://project-2-api.herokuapp.com/videos?api_key="123')
-          .then(response => {
-            this.setState({
-              videos: response.data
-            });
-          })
-      ],
-
-      [
-        axios
-          .get(`https://project-2-api.herokuapp.com/videos/${id}?api_key="123`)
-          .then(response =>
-            this.setState({
-              mainVideo: response.data,
-              currentId: response.data.id,
-              isLoading: false
+    setTimeout(
+      () =>
+        axios.all(
+          [
+            axios.get(`${apiUrl}/videos${apiKey}`).then(response => {
+              this.setState({
+                videos: response.data
+              });
             })
-          )
-      ]
+          ],
+
+          [
+            axios.get(`${apiUrl}/videos/${id}${apiKey}`).then(response =>
+              this.setState({
+                mainVideo: response.data,
+                currentId: response.data.id,
+                isLoading: false,
+                firstLoad: false
+              })
+            )
+          ]
+        ),
+      2750
     );
   }
 
   renderNewVideo = id => {
     this.setState({
-      isLoading: true
+      isLoading: true,
+      whichLoad: vidLoading
     });
-    axios
-      .get(`https://project-2-api.herokuapp.com/videos/${id}?api_key="123`)
-      .then(response => {
-        this.setState({
-          mainVideo: response.data,
-          isLoading: false,
-          currentId: response.data.id
-        });
-      });
+    setTimeout(
+      () =>
+        axios.get(`${apiUrl}/videos/${id}${apiKey}`).then(response => {
+          this.setState({
+            mainVideo: response.data,
+            isLoading: false,
+            currentId: response.data.id,
+            whichLoad: ""
+          });
+        }),
+      1500
+    );
   };
 
   pushComment = comment => {
-    let mainVideo = this.state.mainVideo;
-    this.state.mainVideo.comments.push(comment);
-
-    this.setState({
-      mainVideo: mainVideo
-    });
+    axios
+      .post(
+        `${apiUrl}/videos/${this.state.currentId}/comments${apiKey}`,
+        comment
+      )
+      .then(response => {
+        axios
+          .get(`${apiUrl}/videos/${this.state.currentId}${apiKey}`)
+          .then(response => {
+            this.setState({
+              mainVideo: response.data
+            });
+          });
+      });
   };
 
   render() {
@@ -98,7 +105,9 @@ class App extends Component {
       <div>
         <Nav />
         {this.state.isLoading ? (
-          <h1>Loading</h1>
+          <div class="loading">
+            <img src={this.state.whichLoad} />
+          </div>
         ) : (
           <Switch>
             <Route path="/upload" exact component={Upload} />
@@ -122,6 +131,7 @@ class App extends Component {
                     currentId={props.match.params.id}
                     renderNewVid={this.renderNewVideo}
                     renderData={this.renderData}
+                    currentUser={this.state.currentUser}
                   />
                 );
               }}
@@ -139,6 +149,7 @@ class App extends Component {
                     currentId={"1af0jruup5gu"}
                     renderNewVid={this.renderNewVideo}
                     renderData={this.renderData}
+                    currentUser={this.state.currentUser}
                   />
                 );
               }}
