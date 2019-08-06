@@ -5,20 +5,27 @@ import Next from "./Next.js";
 
 export default class Main extends Component {
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props.currentId, prevProps.currentId);
     if (this.props.currentId !== prevProps.currentId) {
       this.props.renderNewVid(this.props.currentId);
     }
   }
 
   render() {
-    let { currentId, mainVideo, videos, currentUser, pushComment } = this.props;
+    let {
+      currentId,
+      mainVideo,
+      videos,
+      currentUser,
+      pushComment,
+      deleteComment
+    } = this.props;
 
     return (
       <main className="home">
         <MainVideo mainVideo={mainVideo} currentId={currentId} />
         <div className="main">
           <MainInfo
+            deleteComment={deleteComment}
             mainVideo={mainVideo}
             pushComment={pushComment}
             currentUser={currentUser}
@@ -30,11 +37,12 @@ export default class Main extends Component {
   }
 }
 
-function MainInfo({ mainVideo, pushComment, currentUser }) {
+function MainInfo({ mainVideo, pushComment, currentUser, deleteComment }) {
   return (
     <div className="main__info">
       <VideoHeader mainVideo={mainVideo} />
       <Comments
+        deleteComment={deleteComment}
         mainVideo={mainVideo}
         pushComment={pushComment}
         currentUser={currentUser}

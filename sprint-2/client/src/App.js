@@ -38,7 +38,7 @@ class App extends Component {
     }
   }
 
-  renderData(id) {
+  renderData = id => {
     setTimeout(
       () =>
         axios.all(
@@ -61,9 +61,9 @@ class App extends Component {
             })
           ]
         ),
-      2750
+      2000
     );
-  }
+  };
 
   renderNewVideo = id => {
     this.setState({
@@ -80,7 +80,7 @@ class App extends Component {
             whichLoad: ""
           });
         }),
-      1500
+      500
     );
   };
 
@@ -101,13 +101,23 @@ class App extends Component {
       });
   };
 
+  deleteComment = id => {
+    axios
+      .delete(
+        `${apiUrl}/videos/${this.state.currentId}/comments/${id}${apiKey}`
+      )
+      .then(response => {
+        this.renderNewVideo(this.state.currentId);
+      });
+  };
+
   render() {
     let { mainVideo, videos, currentUser } = this.state;
     return (
       <div>
         <Nav />
         {this.state.isLoading ? (
-          <div class="loading">
+          <div className="loading">
             <img src={this.state.whichLoad} alt="loading-animation" />
           </div>
         ) : (
@@ -117,7 +127,6 @@ class App extends Component {
             <Route
               path="/videos/:id"
               render={props => {
-                console.log(mainVideo);
                 return (
                   <Main
                     mainVideo={mainVideo}
@@ -127,6 +136,7 @@ class App extends Component {
                     renderNewVid={this.renderNewVideo}
                     renderData={this.renderData}
                     currentUser={currentUser}
+                    deleteComment={this.deleteComment}
                   />
                 );
               }}
@@ -144,6 +154,7 @@ class App extends Component {
                     renderNewVid={this.renderNewVideo}
                     renderData={this.renderData}
                     currentUser={currentUser}
+                    deleteComment={this.deleteComment}
                   />
                 );
               }}

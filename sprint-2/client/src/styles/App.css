@@ -500,6 +500,15 @@
   border-radius: 100%;
 }
 
+.thread__delete {
+  color: red;
+  font-weight: 500;
+  font-size: 0.75em;
+  padding-left: 0.5em;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
 .thread__response {
   display: -webkit-box;
   display: -ms-flexbox;

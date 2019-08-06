@@ -3,7 +3,12 @@ import React, { Component } from "react";
 import ProfilePic from "../assets/Images/Mohan-muruge.jpg";
 import AnonPic from "../assets/Images/anonymous.jpg";
 
-export default function Comments({ mainVideo, pushComment, currentUser }) {
+export default function Comments({
+  mainVideo,
+  pushComment,
+  currentUser,
+  deleteComment
+}) {
   return (
     <div className="comment">
       <CommentCounter mainVideo={mainVideo} />
@@ -12,7 +17,11 @@ export default function Comments({ mainVideo, pushComment, currentUser }) {
         mainVideo={mainVideo}
         currentUser={currentUser}
       />
-      <EachComment comments={mainVideo.comments} currentUser={currentUser} />
+      <EachComment
+        comments={mainVideo.comments}
+        currentUser={currentUser}
+        deleteComment={deleteComment}
+      />
     </div>
   );
 }
@@ -102,22 +111,12 @@ function commentPic(user, commentName) {
 
 class EachComment extends Component {
   state = {
-    display: "none",
+    display: "initial",
     color: "red",
     fontWeight: "500",
     fontSize: "0.75em",
     paddingLeft: "0.5em"
   };
-
-  displayDelete(id, comments) {
-    const idMatch = comments.find(comment => {
-      return id === comment.id;
-    });
-
-    this.setState({
-      display: "initial"
-    });
-  }
 
   render() {
     const timestamp = time => {
@@ -134,13 +133,7 @@ class EachComment extends Component {
       .reverse()
       .map((obj, i) => {
         return (
-          <section
-            className="thread__response"
-            key={obj.id}
-            onMouseEnter={() => {
-              this.displayDelete(obj.id, commentContentList);
-            }}
-          >
+          <section className="thread__response" key={obj.id}>
             <div className="thread__profile">
               <img
                 className="thread__profile--pic"
@@ -153,7 +146,14 @@ class EachComment extends Component {
               <div className="thread__user">
                 <p className="thread__user--name">
                   {obj.name}
-                  <span style={this.state}>Delete Comment</span>
+                  <span
+                    className="thread__delete"
+                    onClick={() => {
+                      this.props.deleteComment(obj.id);
+                    }}
+                  >
+                    Delete Comment
+                  </span>
                 </p>
                 <p className="thread__user--date">{timestamp(obj.timestamp)}</p>
               </div>

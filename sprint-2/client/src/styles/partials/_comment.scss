@@ -65,6 +65,15 @@
       border-radius: 100%;
     }
   }
+
+  &__delete {
+    color: red;
+    font-weight: 500;
+    font-size: 0.75em;
+    padding-left: 0.5em;
+    cursor: grab;
+  }
+
   &__response {
     display: flex;
     justify-content: space-between;
