@@ -1,0 +1,32 @@
+@import "./colour.scss";
+@import "./mixin.scss";
+@import "./variables.scss";
+
+.main {
+  padding-top: 1em;
+  margin-bottom: 1em;
+  padding: 0 $side-padding-phone;
+}
+
+@media screen and (min-width: $tablet-media) {
+  .main {
+    padding: $side-padding-tablet;
+  }
+}
+
+@media screen and (min-width: $desktop-media) {
+  .main {
+    display: flex;
+    padding: 0 $side-padding-desktop;
+    align-items: flex-start;
+    &__info {
+      width: 1400px;
+      margin-right: 2em;
+      border-right: $mercury 1.5px solid;
+    }
+
+    &__next {
+      width: 700px;
+    }
+  }
+}

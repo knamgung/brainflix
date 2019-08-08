@@ -1,0 +1,181 @@
+@import "./mixin.scss";
+@import "./variables.scss";
+@import "./colour.scss";
+
+.upload {
+  padding: 0 $side-padding-phone;
+
+  &__head {
+    margin-top: 1.5em;
+    font-size: 1.75em;
+    color: $black;
+  }
+
+  &__thumbnail {
+    &--title {
+      @include subhead;
+      margin-top: 0;
+    }
+
+    &--img {
+      width: 100%;
+      border-radius: 2.5%;
+      margin-bottom: 1.25em;
+    }
+  }
+
+  &__title {
+    &--title {
+      @include subhead;
+    }
+    &-write {
+      @include input;
+      width: 100%;
+      height: 4em;
+      padding-left: 20px;
+      font-weight: 100;
+      font-size: 1em;
+    }
+    margin-bottom: 1em;
+  }
+
+  &__desc {
+    &--title {
+      @include subhead;
+    }
+    &-write {
+      @include input;
+      width: 100%;
+      height: 16em;
+      padding: 15px;
+      resize: none;
+      font-weight: 100;
+      font-size: 1em;
+    }
+  }
+
+  &__cta {
+    margin-top: 2em;
+  }
+
+  &__publish {
+    width: 100%;
+    @include button;
+    font-size: 1.25em;
+    height: 3em;
+
+    border-radius: 0.35em;
+  }
+
+  & a {
+    text-decoration: none;
+  }
+
+  &__cancel {
+    text-align: center;
+    font-size: 1.25em;
+    color: $bb-light-blue;
+    font-weight: 500;
+    margin: 2em 0;
+
+    &:hover {
+      color: $bb-dark-blue;
+    }
+  }
+}
+
+@media screen and (min-width: $tablet-media) {
+  .upload {
+    padding: 0 $side-padding-tablet;
+    margin-bottom: 5em;
+
+    &__body {
+      padding: 3.5em 0;
+      border-bottom: $mercury 0.75px solid;
+      border-top: $mercury 0.75px solid;
+    }
+
+    &__head {
+      font-size: 3em;
+
+      margin-bottom: 1em;
+    }
+
+    &__thumbnail {
+      &--img {
+        width: 50%;
+      }
+    }
+
+    &__form {
+      margin-top: 2em;
+    }
+
+    &__publish {
+      width: 10em;
+    }
+    &__cancel {
+      margin: 0;
+      width: 10em;
+    }
+
+    &__cta {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      margin: 6em 0;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-media) {
+  .upload {
+    padding: 0 $side-padding-desktop;
+    &__body {
+      display: flex;
+      align-items: baseline;
+      padding-bottom: 3em;
+      padding-top: 1em;
+    }
+
+    &__thumbnail {
+      &-wrap {
+        width: 100%;
+      }
+      &--img {
+        width: 100%;
+        height: 24em;
+        margin-bottom: 0;
+      }
+    }
+
+    &__title {
+      margin-bottom: 1em;
+      &-write {
+        width: 100%;
+      }
+      &--title {
+        margin-top: 0;
+      }
+    }
+
+    // &__desc {
+    //   &--title {
+    //     @include subhead;
+    //   }
+    //   &-write {
+    //     @include input;
+    //     width: 100%;
+    //     height: 16em;
+    //     padding: 15px;
+    //     resize: none;
+    //     font-weight: 100;
+    //     font-size: 1em;
+    //   }
+
+    &__info {
+      width: 100%;
+      margin-left: 2em;
+    }
+  }
+}
