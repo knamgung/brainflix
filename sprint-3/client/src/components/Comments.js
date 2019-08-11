@@ -27,7 +27,12 @@ export default function Comments({
 }
 
 function CommentCounter({ mainVideo }) {
-  let commentCount = mainVideo.comments.length + " Comments";
+  let commentCount = () => {
+    if (mainVideo.comments === undefined) {
+    } else {
+      return mainVideo.comments.length + " Comments";
+    }
+  };
   return <h3 className="comment__counter">{commentCount}</h3>;
 }
 
@@ -128,41 +133,48 @@ class EachComment extends Component {
       return timestamp;
     };
 
-    let commentContentList = this.props.comments
-      .slice()
-      .reverse()
-      .map((obj, i) => {
-        return (
-          <section className="thread__response" key={obj.id}>
-            <div className="thread__profile">
-              <img
-                className="thread__profile--pic"
-                src={commentPic(this.props.currentUser, obj.name)}
-                alt={obj.name + "-profile-pic"}
-              />
-            </div>
+    let commentContentList = () => {
+      if (this.props.comments === undefined) {
+      } else {
+        return this.props.comments
+          .slice()
+          .reverse()
+          .map((obj, i) => {
+            return (
+              <section className="thread__response" key={obj.id}>
+                <div className="thread__profile">
+                  <img
+                    className="thread__profile--pic"
+                    src={commentPic(this.props.currentUser, obj.name)}
+                    alt={obj.name + "-profile-pic"}
+                  />
+                </div>
 
-            <div className="thread__content">
-              <div className="thread__user">
-                <p className="thread__user--name">
-                  {obj.name}
-                  <span
-                    className="thread__delete"
-                    onClick={() => {
-                      this.props.deleteComment(obj.id);
-                    }}
-                  >
-                    Delete Comment
-                  </span>
-                </p>
-                <p className="thread__user--date">{timestamp(obj.timestamp)}</p>
-              </div>
-              <p className="thread__comment">{obj.comment}</p>
-            </div>
-          </section>
-        );
-      });
+                <div className="thread__content">
+                  <div className="thread__user">
+                    <p className="thread__user--name">
+                      {obj.name}
+                      <span
+                        className="thread__delete"
+                        onClick={() => {
+                          this.props.deleteComment(obj.id);
+                        }}
+                      >
+                        Delete Comment
+                      </span>
+                    </p>
+                    <p className="thread__user--date">
+                      {timestamp(obj.timestamp)}
+                    </p>
+                  </div>
+                  <p className="thread__comment">{obj.comment}</p>
+                </div>
+              </section>
+            );
+          });
+      }
+    };
 
-    return <div className="thread">{commentContentList}</div>;
+    return <div className="thread">{commentContentList()}</div>;
   }
 }

@@ -8,8 +8,6 @@ import axios from "axios";
 
 import loadAnimation from "./assets/animation/bf.gif";
 import vidLoading from "./assets/animation/vidBF.gif";
-const apiKey = "?api_key=c03185ad-ce89-4771-aa63-e418f96376b0";
-const apiUrl = "https://project-2-api.herokuapp.com";
 
 class App extends Component {
   constructor(props) {
@@ -43,7 +41,7 @@ class App extends Component {
       () =>
         axios.all(
           [
-            axios.get(`${apiUrl}/videos${apiKey}`).then(response => {
+            axios.get(`/videos`).then(response => {
               this.setState({
                 videos: response.data
               });
@@ -51,7 +49,7 @@ class App extends Component {
           ],
 
           [
-            axios.get(`${apiUrl}/videos/${id}${apiKey}`).then(response => {
+            axios.get(`/videos/${id}`).then(response => {
               this.setState({
                 mainVideo: response.data,
                 currentId: response.data.id,
@@ -72,7 +70,7 @@ class App extends Component {
     });
     setTimeout(
       () =>
-        axios.get(`${apiUrl}/videos/${id}${apiKey}`).then(response => {
+        axios.get(`/videos/${id}`).then(response => {
           this.setState({
             mainVideo: response.data,
             isLoading: false,
@@ -85,41 +83,39 @@ class App extends Component {
   };
 
   pushComment = comment => {
-    axios
-      .post(
-        `${apiUrl}/videos/${this.state.currentId}/comments${apiKey}`,
-        comment
-      )
-      .then(() => {
-        axios
-          .get(`${apiUrl}/videos/${this.state.currentId}${apiKey}`)
-          .then(response => {
-            this.setState({
-              mainVideo: response.data
-            });
-          });
+    axios.post(`/videos/${this.state.currentId}/comments`, comment).then(() => {
+      axios.get(`/videos/${this.state.currentId}`).then(response => {
+        this.setState({
+          mainVideo: response.data
+        });
       });
+    });
+  };
+
+  addVideo = video => {
+    axios.post("/videos/upload", video).then(response => {
+      axios.get(`/videos`).then(response => {
+        this.setState({
+          videos: response.data
+        });
+      });
+    });
   };
 
   deleteComment = id => {
-    axios
-      .delete(
-        `${apiUrl}/videos/${this.state.currentId}/comments/${id}${apiKey}`
-      )
-      .then(response => {
-        axios
-          .get(`${apiUrl}/videos/${this.state.currentId}${apiKey}`)
-          .then(response => {
-            this.setState({
-              mainVideo: response.data,
-              currentId: response.data.id
-            });
-          });
+    axios.delete(`/videos/${this.state.currentId}/comments/${id}`).then(() => {
+      axios.get(`/videos/${this.state.currentId}`).then(response => {
+        this.setState({
+          mainVideo: response.data,
+          currentId: response.data.id
+        });
       });
+    });
   };
 
   render() {
     let { mainVideo, videos, currentUser } = this.state;
+
     return (
       <div>
         <Nav />
@@ -129,7 +125,13 @@ class App extends Component {
           </div>
         ) : (
           <Switch>
-            <Route path="/upload" exact component={Upload} />
+            <Route
+              path="/upload"
+              exact
+              render={props => {
+                return <Upload addVideo={this.addVideo} {...props} />;
+              }}
+            />
 
             <Route
               path="/videos/:id"
