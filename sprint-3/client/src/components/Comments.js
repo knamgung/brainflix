@@ -116,7 +116,6 @@ function commentPic(user, commentName) {
 
 class EachComment extends Component {
   state = {
-    display: "initial",
     color: "red",
     fontWeight: "500",
     fontSize: "0.75em",
