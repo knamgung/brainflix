@@ -93,4 +93,20 @@ router.delete("/:videoId/comments/:commentId", (req, res) => {
   res.send(vids);
 });
 
+router.put("/:videoId/likes", (req, res) => {
+  const vids =
+    parseFloat(
+      videos.mainVideos.find(video => {
+        return req.params.videoId == video.id;
+      }).likes
+    ) + 1;
+
+  videos.mainVideos.find(video => {
+    return req.params.videoId == video.id;
+  }).likes = String(vids);
+
+  res.json(vids);
+  helper.writeJSON(videoJSON, videos);
+});
+
 module.exports = router;

@@ -2,19 +2,19 @@ import React from "react";
 import Heart from "../assets/Icons/SVG/Icon-likes.svg";
 import Views from "../assets/Icons/SVG/Icon-views.svg";
 
-export default function VideoHeader({ mainVideo }) {
+export default function VideoHeader({ mainVideo, likeVideo }) {
   const { title } = mainVideo;
 
   return (
     <div className="vid-head">
       <h1 className="vid-head__title">{title}</h1>
-      <VideoInfo mainVideo={mainVideo} />
+      <VideoInfo mainVideo={mainVideo} likeVideo={likeVideo} />
       <VideoDescription mainVideo={mainVideo} />
     </div>
   );
 }
 
-function VideoInfo({ mainVideo }) {
+function VideoInfo({ mainVideo, likeVideo }) {
   const { channel, timestamp } = mainVideo;
   const author = `By ${channel}`;
   const convertDate = new Date(timestamp);
@@ -29,7 +29,7 @@ function VideoInfo({ mainVideo }) {
         <h5 className="info__author">{author}</h5>
         <p className="info__date">{vidDate}</p>
       </div>
-      <ViewsLikes mainVideo={mainVideo} />
+      <ViewsLikes mainVideo={mainVideo} likeVideo={likeVideo} />
     </div>
   );
 }
@@ -44,7 +44,7 @@ function VideoDescription({ mainVideo }) {
   );
 }
 
-function ViewsLikes({ mainVideo }) {
+function ViewsLikes({ mainVideo, likeVideo }) {
   const { likes, views } = mainVideo;
 
   return (
@@ -53,7 +53,7 @@ function ViewsLikes({ mainVideo }) {
         <img src={Views} className="views__icon" alt="views-icon" />
         <p className="views__counter">{views}</p>
       </div>
-      <div className="likes">
+      <div className="likes" onClick={likeVideo}>
         <img src={Heart} className="likes__icon" alt="likes-icon" />
         <p className="likes__counter">{likes}</p>
       </div>

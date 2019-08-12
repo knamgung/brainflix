@@ -92,6 +92,16 @@ class App extends Component {
     });
   };
 
+  likeVideo = () => {
+    axios.put(`/videos/${this.state.currentId}/likes`).then(() => {
+      axios.get(`/videos/${this.state.currentId}`).then(response => {
+        this.setState({
+          mainVideo: response.data
+        });
+      });
+    });
+  };
+
   addVideo = video => {
     axios.post("/videos/upload", video).then(response => {
       axios.get(`/videos`).then(response => {
@@ -146,6 +156,7 @@ class App extends Component {
                     renderData={this.renderData}
                     currentUser={currentUser}
                     deleteComment={this.deleteComment}
+                    likeVideo={this.likeVideo}
                   />
                 );
               }}
@@ -157,6 +168,7 @@ class App extends Component {
                 return (
                   <Main
                     mainVideo={mainVideo}
+                    likeVideo={this.likeVideo}
                     videos={videos}
                     pushComment={this.pushComment}
                     currentId={localStorage["initId"]}

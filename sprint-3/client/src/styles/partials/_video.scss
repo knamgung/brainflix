@@ -79,11 +79,20 @@
   display: flex;
   align-items: center;
   margin-right: 1em;
+  &:hover {
+    transform: translateY(-1px);
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
 
   &__icon {
     width: 1.55em;
     height: 1.55em;
     margin-right: 0.75em;
+
+    &:hover {
+      cursor: grab;
+      transition: 0.5s;
+    }
   }
 
   &__counter {

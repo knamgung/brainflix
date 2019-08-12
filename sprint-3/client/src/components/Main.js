@@ -17,7 +17,8 @@ export default class Main extends Component {
       videos,
       currentUser,
       pushComment,
-      deleteComment
+      deleteComment,
+      likeVideo
     } = this.props;
 
     return (
@@ -29,6 +30,7 @@ export default class Main extends Component {
             mainVideo={mainVideo}
             pushComment={pushComment}
             currentUser={currentUser}
+            likeVideo={likeVideo}
           />
           <Next videos={videos} currentId={currentId} />
         </div>
@@ -37,10 +39,16 @@ export default class Main extends Component {
   }
 }
 
-function MainInfo({ mainVideo, pushComment, currentUser, deleteComment }) {
+function MainInfo({
+  mainVideo,
+  pushComment,
+  currentUser,
+  deleteComment,
+  likeVideo
+}) {
   return (
     <div className="main__info">
-      <VideoHeader mainVideo={mainVideo} />
+      <VideoHeader mainVideo={mainVideo} likeVideo={likeVideo} />
       <Comments
         deleteComment={deleteComment}
         mainVideo={mainVideo}
